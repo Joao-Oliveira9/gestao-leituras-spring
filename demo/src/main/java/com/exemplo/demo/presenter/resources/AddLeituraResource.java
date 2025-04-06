@@ -1,6 +1,6 @@
 package com.exemplo.demo.presenter.resources;
 
-import com.exemplo.demo.presenter.Dto.LeituraDto;
+import com.exemplo.demo.presenter.Dto.RegistroLeituraDto;
 import com.exemplo.demo.presenter.response.RestMessage;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,5 +16,5 @@ public interface AddLeituraResource {
     public ResponseEntity<RestMessage>  postRequestResgistrarLeituraTeste(@RequestBody Map<String,String> teste);
 
     @PostMapping(value = "create")
-    public ResponseEntity<RestMessage> postRequestResgistrarLeitura(@RequestBody LeituraDto leitura);
+    public ResponseEntity<RestMessage> postRequestResgistrarLeitura(@RequestBody RegistroLeituraDto registroLeitura);
 }

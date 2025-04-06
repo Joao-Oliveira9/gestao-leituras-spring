@@ -1,11 +1,12 @@
 package com.exemplo.demo.presenter.rest;
 
 import com.exemplo.demo.presenter.Dto.LeituraDto;
+import com.exemplo.demo.presenter.Dto.RegistroLeituraDto;
 import com.exemplo.demo.presenter.resources.AddLeituraResource;
 import com.exemplo.demo.presenter.response.RestMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Map;
 
@@ -21,8 +22,11 @@ public class AddLeituraController implements AddLeituraResource {
     }
 
 
-    public ResponseEntity<RestMessage> postRequestResgistrarLeitura(LeituraDto leitura) {
-        System.out.println(leitura.getNomeLivro());
+    public ResponseEntity<RestMessage> postRequestResgistrarLeitura(@RequestBody RegistroLeituraDto registroLeituraDtoRecord) {
+        LeituraDto leitura  = registroLeituraDtoRecord.leitura();
+        System.out.println(leitura.paginasLidas());
+//        System.out.println(registroLeituraDto.getLeitura().getNomeLivro());
+//        System.out.println(registroLeituraDto.getLivro().getPaginasLidas());
         RestMessage message = new RestMessage("Leitura inserida com sucesso");
         return ResponseEntity.status(HttpStatus.OK).body(message) ;
     }
