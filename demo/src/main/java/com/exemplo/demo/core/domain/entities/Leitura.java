@@ -5,13 +5,17 @@ import com.exemplo.demo.core.domain.entities.Status.Status;
 public class Leitura {
     Livro livro;
     Status status;
-    Integer paginaAtual;
+    int paginaAtual;
+    double porcentagemLeitura;
 
-    public Leitura(Livro livro, Status status, Integer paginaAtual) {
+    public Leitura(Livro livro, Status status, Integer paginaAtual,double porcentagemLeitura) {
         this.livro = livro;
         this.status = status;
         this.paginaAtual = paginaAtual;
+        this.porcentagemLeitura = porcentagemLeitura;
     }
+
+    public double getPorcentagemLeitura(){return porcentagemLeitura;}
 
     public Livro getLivro() {
         return livro;
@@ -36,4 +40,6 @@ public class Leitura {
     public void setPaginaAtual(Integer paginaAtual) {
         this.paginaAtual = paginaAtual;
     }
+
+    public void setPorcentagemLeitura(double porcentagemLeitura){this.porcentagemLeitura = porcentagemLeitura;}
 }

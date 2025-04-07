@@ -26,8 +26,8 @@ public class LeituraJPA {
     @Column(name = "paginasLidas")
     private int paginaAtual;
 
-    @Column(name = "andamento")
-    private int porcentagem;
+    @Column(name = "porcentagem")
+    private double porcentagem;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status_leitura", nullable = false)

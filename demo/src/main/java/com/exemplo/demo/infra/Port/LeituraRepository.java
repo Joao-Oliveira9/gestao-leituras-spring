@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 
 public interface LeituraRepository {
-    public void salvar(LeituraJPA leituraJPA);
+    public void salvar(Leitura leitura);
 }

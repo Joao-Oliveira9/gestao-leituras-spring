@@ -3,7 +3,7 @@ package com.exemplo.demo.core.domain.entities;
 public class Livro {
     String nome;
     String nomeAutor;
-    Integer numPaginas;
+    int numPaginas;
 
     public Livro(String nome, String nomeAutor, Integer numPaginas) {
         this.nome = nome;

@@ -4,13 +4,14 @@ import com.exemplo.demo.core.domain.entities.Leitura;
 import com.exemplo.demo.core.domain.entities.Livro;
 import com.exemplo.demo.core.domain.entities.Status.Status;
 import com.exemplo.demo.core.domain.usecases.AddLeituraUseCase;
-import com.exemplo.demo.core.services.config.EntityMapper;
+import com.exemplo.demo.infra.data.config.EntityMapper;
 import com.exemplo.demo.infra.Port.LeituraRepository;
 import com.exemplo.demo.infra.Port.LivroRepository;
 import com.exemplo.demo.infra.data.jpa.LivroJPA;
 import com.exemplo.demo.presenter.dto.LeituraDto;
 import com.exemplo.demo.presenter.dto.LivroDto;
 import com.exemplo.demo.presenter.response.RestMessage;
+import com.exemplo.demo.presenter.response.RestMessageAddLeitura;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,49 +24,42 @@ public class AddLeituraService implements AddLeituraUseCase {
     //COLOCAR NO CONSTRUTOR tirar autowired
     LeituraRepository leituraRepository;
 
-    @Autowired
     LivroRepository livroRepository;
 
-    public Livro adicionarLivro(LivroDto livroDto){
-      //Nao sei se posso colocar entidade no service
-        String nomeLivro = livroDto.nomeLivro();
+    public AddLeituraService(LeituraRepository leituraRepository,LivroRepository livroRepository){
+        this.leituraRepository = leituraRepository;
+        this.livroRepository = livroRepository;
+    }
 
-        String nomeAutor = livroDto.nomeAutor();
-
-        System.out.println(nomeAutor);
-        Integer numero = Integer.parseInt(livroDto.numPaginasLivro());
-        Livro livro = new Livro(nomeLivro,nomeAutor,numero);
-
-//        RestMessage message = new RestMessage("Leitura inserida com sucesso");
-        LivroJPA livroJPA = entityMapper.mapLivro(livro);
-
-        System.out.println(livroJPA.getAutor());
-        System.out.println(livroJPA.getNome());
-//        livroRepository.salvar(livroJPA);
-
-        return livro;
-        // adicionar a parte do repository , mas ai vem a parte do jpa junto
-//        return ResponseEntity.status(HttpStatus.OK).body(message);
+    public AddLeituraService(){
 
     }
 
-    public ResponseEntity<RestMessage> adicionarLeitura(LeituraDto leituraDto,LivroDto livroDto){
-        //Colocar o Livro no Banco de Dados
+
+    public Livro adicionarLivro(LivroDto livroDto){
+        String nomeLivro = livroDto.nomeLivro();
+        String nomeAutor = livroDto.nomeAutor();
+        Integer numero = Integer.parseInt(livroDto.numPaginasLivro());
+        System.out.println(nomeAutor);
+        Livro livro = new Livro(nomeLivro,nomeAutor,numero);
+//        livroRepository.salvar(livro);
+        return livro;
+    }
+
+    public ResponseEntity<RestMessageAddLeitura> adicionarLeitura(LeituraDto leituraDto, LivroDto livroDto){
        Livro livro = adicionarLivro(livroDto);
-       Integer numPaginaAtual = Integer.parseInt(livroDto.numPaginasLivro());
-
+       int numPaginaAtual = Integer.parseInt(leituraDto.paginasLidas());
        Status status = determinarStatusLeitura(livro.getNumPaginas(),numPaginaAtual);
+       double porcentagem = determinarPorcentagemLeitura(numPaginaAtual,livro.getNumPaginas());
+        System.out.println(porcentagem);
+       Leitura leitura = new Leitura(livro,status,numPaginaAtual,porcentagem);
+       System.out.println(leitura.getPorcentagemLeitura());
+       leituraRepository.salvar(leitura);
 
-       Leitura leitura = new Leitura(livro,status,numPaginaAtual);
+//       RestMessage restMessage = new RestMessage("Leitura adicionada");
 
-//       System.out.println(leitura.getLivro().getNome());
-//       ADICIONAR LEITURA
-//        leituraRepository.salvar(entityMapper.mapLeitura(leitura));
-
-
-
-       RestMessage restMessage = new RestMessage("Leitura adicionada");
-       return ResponseEntity.status(HttpStatus.OK).body(restMessage);
+       RestMessageAddLeitura restMessageAddLeitura = new RestMessageAddLeitura(leitura.getStatus());
+       return ResponseEntity.status(HttpStatus.OK).body(restMessageAddLeitura);
 
     }
 
@@ -79,6 +73,10 @@ public class AddLeituraService implements AddLeituraUseCase {
         else{
             return Status.NaoIniciado;
         }
+    }
+
+    public double determinarPorcentagemLeitura(int paginasLidas,int paginasTotais){
+        return Math.round(paginasLidas * 100 / (paginasTotais * 1.0) ) ;
     }
 
 }

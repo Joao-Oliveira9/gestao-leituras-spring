@@ -1,14 +1,12 @@
-package com.exemplo.demo.core.services.config;
+package com.exemplo.demo.infra.data.config;
 
 import com.exemplo.demo.core.domain.entities.Leitura;
 import com.exemplo.demo.core.domain.entities.Livro;
 import com.exemplo.demo.infra.data.jpa.LeituraJPA;
 import com.exemplo.demo.infra.data.jpa.LivroJPA;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 
-public class EntityMapper {
+public class EntityMapper implements EntityMapperInterface {
 
 
     public LeituraJPA mapLeitura(Leitura leitura){
@@ -16,7 +14,8 @@ public class EntityMapper {
         LeituraJPA leituraJPA = new LeituraJPA();
         leituraJPA.setLivroJPA(livroJPA);
         leituraJPA.setStatus(leitura.getStatus());
-        leituraJPA.setPorcentagem(10);
+        System.out.println(leitura.getPorcentagemLeitura());
+        leituraJPA.setPorcentagem(leitura.getPorcentagemLeitura());
         leituraJPA.setPaginaAtual(leitura.getPaginaAtual());
 
         return leituraJPA;
