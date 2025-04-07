@@ -1,33 +1,30 @@
 package com.exemplo.demo.presenter.rest;
 
-import com.exemplo.demo.presenter.Dto.LeituraDto;
-import com.exemplo.demo.presenter.Dto.RegistroLeituraDto;
+import com.exemplo.demo.core.domain.entities.Livro;
+import com.exemplo.demo.core.domain.usecases.AddLeituraUseCase;
+import com.exemplo.demo.presenter.dto.LeituraDto;
+import com.exemplo.demo.presenter.dto.LivroDto;
+import com.exemplo.demo.presenter.dto.RegistroLeituraDto;
 import com.exemplo.demo.presenter.resources.AddLeituraResource;
 import com.exemplo.demo.presenter.response.RestMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.Map;
-
-
 
 public class AddLeituraController implements AddLeituraResource {
 
-    @Override
-    public ResponseEntity<RestMessage> postRequestResgistrarLeituraTeste(Map<String, String> teste) {
-        System.out.println(teste);
-        RestMessage message = new RestMessage("Leitura inserida com sucesso");
-        return ResponseEntity.status(HttpStatus.OK).body(message) ;
+    AddLeituraUseCase addLeituraUseCase;
+
+    public AddLeituraController(AddLeituraUseCase addLeituraUseCase){
+        this.addLeituraUseCase = addLeituraUseCase;
     }
 
-
-    public ResponseEntity<RestMessage> postRequestResgistrarLeitura(@RequestBody RegistroLeituraDto registroLeituraDtoRecord) {
-        LeituraDto leitura  = registroLeituraDtoRecord.leitura();
+    public ResponseEntity<RestMessage> postRequestResgistrarLeitura(RegistroLeituraDto registroLeituraDto) {
+        LeituraDto leitura  = registroLeituraDto.leitura();
+        LivroDto livro = registroLeituraDto.livro();
         System.out.println(leitura.paginasLidas());
-//        System.out.println(registroLeituraDto.getLeitura().getNomeLivro());
-//        System.out.println(registroLeituraDto.getLivro().getPaginasLidas());
-        RestMessage message = new RestMessage("Leitura inserida com sucesso");
-        return ResponseEntity.status(HttpStatus.OK).body(message) ;
+        return addLeituraUseCase.adicionarLeitura(leitura,livro);
     }
 }
