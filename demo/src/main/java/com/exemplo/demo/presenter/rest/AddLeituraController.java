@@ -28,5 +28,4 @@ public class AddLeituraController implements AddLeituraResource {
         return addLeituraUseCase.adicionarLeitura(leitura,livro);
     }
 
-
 }

@@ -8,7 +8,7 @@ import com.exemplo.demo.infra.data.jpa.LivroJPA;
 
 public class EntityMapper implements EntityMapperInterface {
 
-
+    //Livro e Leitura
     public LeituraJPA mapLeitura(Leitura leitura){
         LivroJPA livroJPA = mapLivro(leitura.getLivro());
         LeituraJPA leituraJPA = new LeituraJPA();
@@ -27,8 +27,11 @@ public class EntityMapper implements EntityMapperInterface {
         livroJPA.setNome(livro.getNome());
         livroJPA.setAutor(livro.getNomeAutor());
         livroJPA.setQtdPaginas(livro.getNumPaginas());
-
-
         return livroJPA;
     }
+
+
+    //MetaLongoPrazo
+
+
 }
