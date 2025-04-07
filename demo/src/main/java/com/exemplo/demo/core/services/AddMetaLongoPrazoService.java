@@ -2,24 +2,43 @@ package com.exemplo.demo.core.services;
 
 import com.exemplo.demo.core.domain.entities.MetaLongoPrazo;
 import com.exemplo.demo.core.domain.usecases.AddMetaLongoPrazoUseCase;
+import com.exemplo.demo.infra.Port.MetaLongoPrazoRepository;
 import com.exemplo.demo.presenter.dto.MetaLongoPrazoDto;
+import com.exemplo.demo.presenter.response.RestMessage;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDate;
 
 public class AddMetaLongoPrazoService implements AddMetaLongoPrazoUseCase {
 
-    public void adicionarMeta(MetaLongoPrazoDto metaLongoPrazoDto){
+    MetaLongoPrazoRepository metaLongoPrazoRepository;
+
+    public AddMetaLongoPrazoService(MetaLongoPrazoRepository metaLongoPrazoRepository){
+        this.metaLongoPrazoRepository = metaLongoPrazoRepository;
+    }
+
+    public ResponseEntity<RestMessage> adicionarMeta(MetaLongoPrazoDto metaLongoPrazoDto){
         MetaLongoPrazo metaLongoPrazo = metaMapp(metaLongoPrazoDto);
         if(verificarDatas(metaLongoPrazo.getDataInicio(),metaLongoPrazo.getDataMeta())){
             //salvar no repository
             System.out.println(metaLongoPrazo.getDataInicio());
             System.out.println(metaLongoPrazo.getDataMeta());
             System.out.println(metaLongoPrazo.getNomeAutor());
-            System.out.println(metaLongoPrazo.getNomeLivro());
+            metaLongoPrazoRepository.salvar(metaLongoPrazo);
+
+            RestMessage message = new RestMessage("Data cadastrada");
+
+            return ResponseEntity.status(HttpStatus.OK).body(message);
+
         }
         else{
             System.out.println("Datas Invalidas");
+            RestMessage message = new RestMessage("Erro");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
         }
+
+
     }
 
     public boolean verificarDatas(LocalDate dataInicio,LocalDate dataMetaLongoPrazo){

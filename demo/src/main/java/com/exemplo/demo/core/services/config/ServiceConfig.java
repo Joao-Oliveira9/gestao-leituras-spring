@@ -6,6 +6,7 @@ import com.exemplo.demo.core.services.AddLeituraService;
 import com.exemplo.demo.core.services.AddMetaLongoPrazoService;
 import com.exemplo.demo.infra.Port.LeituraRepository;
 import com.exemplo.demo.infra.Port.LivroRepository;
+import com.exemplo.demo.infra.Port.MetaLongoPrazoRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,7 +19,7 @@ public class ServiceConfig {
     }
 
     @Bean
-    public AddMetaLongoPrazoUseCase addMetaLongoPrazoUseCase(){
-        return new AddMetaLongoPrazoService();
+    public AddMetaLongoPrazoUseCase addMetaLongoPrazoUseCase(MetaLongoPrazoRepository metaLongoPrazoRepository){
+        return new AddMetaLongoPrazoService(metaLongoPrazoRepository);
     }
 }

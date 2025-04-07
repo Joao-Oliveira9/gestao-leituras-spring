@@ -1,14 +1,13 @@
 package com.exemplo.demo.infra.data.jpa;
 
-import com.exemplo.demo.core.domain.entities.Status.Status;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -16,24 +15,20 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "TB_Leitura")
-public class LeituraJPA {
+@Table(name = "TB_META")
+public class MetaLongoPrazoJPA {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID leitura_id;
+    private UUID meta_id;
 
-    @Column(name = "paginasLidas")
-    private int paginaAtual;
+    @Column(name = "data_inicio", nullable = false)
+    private LocalDate data_inicio;
 
-    @Column(name = "porcentagem")
-    private double porcentagem;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status_leitura", nullable = false)
-    private Status Status;
+    @Column(name = "data_meta", nullable = false)
+    private LocalDate data_meta;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "livro_id",unique = false,nullable = false)
+    @JoinColumn(name = "livro_id", nullable = false)
     private LivroJPA livroJPA;
 
     @CreationTimestamp

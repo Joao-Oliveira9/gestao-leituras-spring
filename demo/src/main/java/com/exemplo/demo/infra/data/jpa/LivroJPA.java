@@ -34,6 +34,10 @@ public class LivroJPA {
     @OneToOne(mappedBy = "livroJPA")
     LeituraJPA leituraJPA;
 
+    @OneToOne(mappedBy = "livroJPA")
+    MetaLongoPrazoJPA metaLongoPrazoJPA;
+
+
     @CreationTimestamp
     @Column(name = "created_at",updatable = false)
     private LocalDateTime created_at;
