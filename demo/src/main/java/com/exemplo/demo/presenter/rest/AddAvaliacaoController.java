@@ -20,8 +20,9 @@ public class AddAvaliacaoController implements AddAvaliacaoResource {
     public ResponseEntity<RestMessage> postRequestRegistrarAvaliacao(AvaliacaoDto avaliacaoDto) {
         System.out.println(avaliacaoDto.nomeLivro());
         System.out.println(avaliacaoDto.nota());
+        System.out.println(avaliacaoDto.nomeLivro());
 
-        RestMessage message = new RestMessage("Deu certo");
-        return ResponseEntity.status(HttpStatus.OK).body(message);
+//        RestMessage message = new RestMessage("Deu certo");
+        return addAvaliacaoUseCase.adicionarNota(avaliacaoDto);
     }
 }

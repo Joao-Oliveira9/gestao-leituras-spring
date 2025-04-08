@@ -1,8 +1,10 @@
 package com.exemplo.demo.infra.data.config;
 
+import com.exemplo.demo.core.domain.entities.Avaliacao;
 import com.exemplo.demo.core.domain.entities.Leitura;
 import com.exemplo.demo.core.domain.entities.Livro;
 import com.exemplo.demo.core.domain.entities.MetaLongoPrazo;
+import com.exemplo.demo.infra.data.jpa.AvaliacaoJPA;
 import com.exemplo.demo.infra.data.jpa.LeituraJPA;
 import com.exemplo.demo.infra.data.jpa.LivroJPA;
 import com.exemplo.demo.infra.data.jpa.MetaLongoPrazoJPA;
@@ -41,6 +43,15 @@ public class EntityMapper implements EntityMapperInterface {
         metaLongoPrazoJPA.setData_inicio(metaLongoPrazo.getDataInicio());
         metaLongoPrazoJPA.setLivroJPA(livroJPA);
         return metaLongoPrazoJPA;
+    }
+
+    //Avaliacao
+    public AvaliacaoJPA mapAvaliacao(Avaliacao avaliacao, LivroJPA livroJPA){
+        AvaliacaoJPA avaliacaoJPA = new AvaliacaoJPA();
+        avaliacaoJPA.setNota(avaliacao.getNota());
+        avaliacaoJPA.setEstado(avaliacao.getStatusAval());
+        avaliacaoJPA.setLivroJPA(livroJPA);
+        return avaliacaoJPA;
     }
 
 }

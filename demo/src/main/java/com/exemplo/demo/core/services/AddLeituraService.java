@@ -40,7 +40,7 @@ public class AddLeituraService implements AddLeituraUseCase {
         String nomeLivro = livroDto.nomeLivro();
         String nomeAutor = livroDto.nomeAutor();
         Integer numero = Integer.parseInt(livroDto.numPaginasLivro());
-        System.out.println(nomeAutor);
+
         Livro livro = new Livro(nomeLivro,nomeAutor,numero);
 //        livroRepository.salvar(livro);
         return livro;
