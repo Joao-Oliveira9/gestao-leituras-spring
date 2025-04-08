@@ -25,16 +25,16 @@ public class AvaliacaoJPA {
     @Column(name = "nota", nullable = false)
     private double nota;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "livro_id", unique = false,nullable = false)
-    private LivroJPA livroJPA;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "estado", nullable = false)
     private StatusAval estado;
 
+    @OneToOne
+    @JoinColumn(name = "livro_id", nullable = false, unique = true)
+    private LivroJPA livroJPA;
+
     @CreationTimestamp
-    @Column(name = "created_at",updatable = false)
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime created_at;
 
     @UpdateTimestamp

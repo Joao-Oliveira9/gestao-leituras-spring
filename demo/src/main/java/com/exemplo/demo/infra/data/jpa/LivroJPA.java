@@ -1,11 +1,9 @@
 package com.exemplo.demo.infra.data.jpa;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -18,6 +16,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "TB_Livro")
 public class LivroJPA {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID livro_id;
@@ -32,18 +31,19 @@ public class LivroJPA {
     private int qtdPaginas;
 
     @OneToOne(mappedBy = "livroJPA", cascade = CascadeType.ALL, orphanRemoval = true)
-    LeituraJPA leituraJPA;
+    private LeituraJPA leituraJPA;
 
     @OneToOne(mappedBy = "livroJPA", cascade = CascadeType.ALL, orphanRemoval = true)
-    MetaLongoPrazoJPA metaLongoPrazoJPA;
+    private MetaLongoPrazoJPA metaLongoPrazoJPA;
 
+    @OneToOne(mappedBy = "livroJPA", cascade = CascadeType.ALL, orphanRemoval = true)
+    private AvaliacaoJPA avaliacaoJPA;
 
     @CreationTimestamp
-    @Column(name = "created_at",updatable = false)
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime created_at;
 
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updated_at;
-
 }
