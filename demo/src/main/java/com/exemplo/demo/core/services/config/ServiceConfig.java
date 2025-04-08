@@ -1,8 +1,10 @@
 package com.exemplo.demo.core.services.config;
 
+import com.exemplo.demo.core.domain.usecases.AddAvaliacaoUseCase;
 import com.exemplo.demo.core.domain.usecases.AddLeituraUseCase;
 import com.exemplo.demo.core.domain.usecases.AddMetaLongoPrazoUseCase;
 import com.exemplo.demo.core.domain.usecases.DeleteLivroUseCase;
+import com.exemplo.demo.core.services.AddAvaliacaoService;
 import com.exemplo.demo.core.services.AddLeituraService;
 import com.exemplo.demo.core.services.AddMetaLongoPrazoService;
 import com.exemplo.demo.core.services.DeleteLivroService;
@@ -28,5 +30,10 @@ public class ServiceConfig {
     @Bean
     public DeleteLivroUseCase deleteLivroUseCase(LeituraRepository leituraRepository){
         return new DeleteLivroService(leituraRepository);
+    }
+
+    @Bean
+    public AddAvaliacaoUseCase addAvaliacaoUseCase(){
+        return new AddAvaliacaoService();
     }
 }

@@ -1,8 +1,10 @@
 package com.exemplo.demo.presenter.config;
 
+import com.exemplo.demo.core.domain.usecases.AddAvaliacaoUseCase;
 import com.exemplo.demo.core.domain.usecases.AddLeituraUseCase;
 import com.exemplo.demo.core.domain.usecases.AddMetaLongoPrazoUseCase;
 import com.exemplo.demo.core.domain.usecases.DeleteLivroUseCase;
+import com.exemplo.demo.presenter.rest.AddAvaliacaoController;
 import com.exemplo.demo.presenter.rest.AddLeituraController;
 import com.exemplo.demo.presenter.rest.AddMetaLongoPrazoController;
 import com.exemplo.demo.presenter.rest.DeleteLivroController;
@@ -26,6 +28,11 @@ public class RestConfig {
     @Bean
     public DeleteLivroController deleteLivroController(DeleteLivroUseCase deleteLivroUseCase){
         return new DeleteLivroController(deleteLivroUseCase);
+    }
+
+    @Bean
+    public AddAvaliacaoController addAvaliacaoController(AddAvaliacaoUseCase addAvaliacaoUseCase){
+        return new AddAvaliacaoController(addAvaliacaoUseCase);
     }
 
 }
