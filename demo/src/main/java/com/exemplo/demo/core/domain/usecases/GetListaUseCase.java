@@ -1,7 +1,6 @@
 package com.exemplo.demo.core.domain.usecases;
 
-import com.exemplo.demo.infra.data.Dto.LivroLeituraView;
-import org.springframework.http.ResponseEntity;
+import com.exemplo.demo.infra.data.dto.LivroLeituraView;
 
 import java.util.List;
 

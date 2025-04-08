@@ -3,14 +3,13 @@ package com.exemplo.demo.presenter.response;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
-import java.util.Objects;
 
-public class RestMessageGetListaLivroEmAndamento {
+public class RestMessageGetListaLivro {
     private final HttpStatus status = HttpStatus.OK;
 
     private List<Object> livros;
 
-    public RestMessageGetListaLivroEmAndamento(List<Object> livros) {
+    public RestMessageGetListaLivro(List<Object> livros) {
         this.livros = livros;
     }
 

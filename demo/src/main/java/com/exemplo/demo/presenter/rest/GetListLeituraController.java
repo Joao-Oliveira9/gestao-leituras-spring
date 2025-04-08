@@ -3,8 +3,7 @@ package com.exemplo.demo.presenter.rest;
 import com.exemplo.demo.core.domain.usecases.GetListaUseCase;
 import com.exemplo.demo.presenter.resources.GetListLeituraResource;
 import com.exemplo.demo.presenter.response.RestMessage;
-import com.exemplo.demo.presenter.response.RestMessageAddLeitura;
-import com.exemplo.demo.presenter.response.RestMessageGetListaLivroEmAndamento;
+import com.exemplo.demo.presenter.response.RestMessageGetListaLivro;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -18,11 +17,11 @@ public class GetListLeituraController implements GetListLeituraResource {
         this.getListaUseCase = getListaUseCase;
     }
 
-    public ResponseEntity<RestMessageGetListaLivroEmAndamento> getRequestListaController(){
+    public ResponseEntity<RestMessageGetListaLivro> getRequestListaController(){
         RestMessage restMessage = new RestMessage("ListaLeituras");
         List livros = getListaUseCase.buscarLivrosEmProgresso();
 
-        RestMessageGetListaLivroEmAndamento restMessageGetListaLivroEmAndamento = new RestMessageGetListaLivroEmAndamento(livros);
+        RestMessageGetListaLivro restMessageGetListaLivroEmAndamento = new RestMessageGetListaLivro(livros);
 
         return ResponseEntity.status(HttpStatus.OK).body(restMessageGetListaLivroEmAndamento);
     }

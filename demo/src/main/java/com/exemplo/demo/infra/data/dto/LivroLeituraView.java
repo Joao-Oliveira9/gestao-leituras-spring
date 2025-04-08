@@ -1,8 +1,4 @@
-package com.exemplo.demo.infra.data.Dto;
-
-import com.exemplo.demo.core.domain.entities.Status.Status;
-
-
+package com.exemplo.demo.infra.data.dto;
 
 import com.exemplo.demo.core.domain.entities.Status.Status;
 

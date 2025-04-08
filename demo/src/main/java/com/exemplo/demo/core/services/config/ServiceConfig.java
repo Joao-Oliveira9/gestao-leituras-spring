@@ -36,4 +36,9 @@ public class ServiceConfig {
     public GetListaUseCase getListaUseCase(LeituraRepository leituraRepository){
         return  new GetListaService(leituraRepository);
     }
+
+    @Bean
+    public GetListAvaliacaoUseCase getListAvaliacaoUseCase(LivroRepository livroRepository){
+        return new GetListaAvaliacaoService(livroRepository);
+    }
 }

@@ -30,8 +30,8 @@ public class RestConfig {
     }
 
     @Bean
-    public GetListAvaliacaoController getListAvaliacaoController(){
-        return new GetListAvaliacaoController();
+    public GetListAvaliacaoController getListAvaliacaoController(GetListAvaliacaoUseCase getListAvaliacaoUseCase){
+        return new GetListAvaliacaoController(getListAvaliacaoUseCase);
     }
 
     @Bean
