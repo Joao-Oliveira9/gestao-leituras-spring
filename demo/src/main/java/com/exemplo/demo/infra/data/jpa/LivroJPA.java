@@ -31,10 +31,10 @@ public class LivroJPA {
     @Column(name = "paginasTotais", nullable = false)
     private int qtdPaginas;
 
-    @OneToOne(mappedBy = "livroJPA")
+    @OneToOne(mappedBy = "livroJPA", cascade = CascadeType.ALL, orphanRemoval = true)
     LeituraJPA leituraJPA;
 
-    @OneToOne(mappedBy = "livroJPA")
+    @OneToOne(mappedBy = "livroJPA", cascade = CascadeType.ALL, orphanRemoval = true)
     MetaLongoPrazoJPA metaLongoPrazoJPA;
 
 

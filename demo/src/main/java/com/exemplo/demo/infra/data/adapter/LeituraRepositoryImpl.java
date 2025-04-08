@@ -46,29 +46,50 @@ public class LeituraRepositoryImpl implements LeituraRepository {
         LivroJPA livroJPA = findLivro(nome,nomeAutor,sql);
         System.out.println(livroJPA.getAutor());
         System.out.println(livroJPA.getLivro_id());
-        LeituraJPA leituraJPA = findLeitura(livroJPA.getLivro_id());
-        deletarSql(leituraJPA.getLeitura_id());
+//        LeituraJPA leituraJPA = findLeitura(livroJPA.getLivro_id());
+//        deletarSql(leituraJPA.getLeitura_id());
+
+        deletarLivroPorId(livroJPA.getLivro_id());
+//        deletarPorLivroId(livroJPA.getLivro_id());
     }
 
 
+
     @Transactional
-    public void deletarSql(UUID leitura_id){
-        LeituraJPA leitura = entityManager.find(LeituraJPA.class, leitura_id);
+    public void deletarPorLivroId(UUID livroId) {
+        String jpql = "DELETE FROM LeituraJPA l WHERE l.livroJPA.livro_id = :livroId";
+
+        entityManager.createQuery(jpql)
+                .setParameter("livroId", livroId)
+                .executeUpdate();
+    }
+
+    @Transactional
+    public void deletarLivroPorId(UUID livroId) {
+        LivroJPA livro = entityManager.find(LivroJPA.class, livroId);
+        if (livro != null) {
+            entityManager.remove(livro);
+        }
+    }
+
+//    @Transactional
+//    public void deletarSql(UUID leitura_id){
+//        LeituraJPA leitura = entityManager.find(LeituraJPA.class, leitura_id);
+////        entityManager.remove(leitura);
 //        entityManager.remove(leitura);
-        entityManager.remove(leitura);
-    }
+//    }
 
-    @Transactional
-    public LeituraJPA findLeitura(UUID livro_id){
-        String sql = "SELECT * FROM tb_leitura WHERE livro_id = :id ;";
-
-        return  (LeituraJPA)entityManager.createNativeQuery(sql, LeituraJPA.class)
-                .setParameter("id", livro_id)
-                .getResultStream()
-                .findFirst()
-                .orElse(null);
-
-    }
+//    @Transactional
+//    public LeituraJPA findLeitura(UUID livro_id){
+//        String sql = "SELECT * FROM tb_leitura WHERE livro_id = :id ;";
+//
+//        return  (LeituraJPA)entityManager.createNativeQuery(sql, LeituraJPA.class)
+//                .setParameter("id", livro_id)
+//                .getResultStream()
+//                .findFirst()
+//                .orElse(null);
+//
+//    }
 
 
     @Transactional
