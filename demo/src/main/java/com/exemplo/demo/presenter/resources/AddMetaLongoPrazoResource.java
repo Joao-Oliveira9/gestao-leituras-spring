@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public interface addMetaLongoPrazoResource {
+public interface AddMetaLongoPrazoResource {
 
     @PostMapping(value = "add")
     public ResponseEntity<RestMessage> postRequestMetaLongoPrazo(@RequestBody MetaLongoPrazoDto metaLongoPrazo);

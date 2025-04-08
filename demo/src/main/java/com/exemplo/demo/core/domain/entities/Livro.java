@@ -5,6 +5,10 @@ public class Livro {
     String nomeAutor;
     int numPaginas;
 
+    public Livro(){
+
+    }
+
     public Livro(String nome, String nomeAutor, Integer numPaginas) {
         this.nome = nome;
         this.nomeAutor = nomeAutor;
