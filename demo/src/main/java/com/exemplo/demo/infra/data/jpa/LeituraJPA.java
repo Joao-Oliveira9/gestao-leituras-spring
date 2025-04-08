@@ -30,7 +30,8 @@ public class LeituraJPA {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status_leitura", nullable = false)
-    private Status Status;
+    //tava com letra maiuscula
+    private Status status;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "livro_id",unique = false,nullable = false)

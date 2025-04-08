@@ -3,6 +3,7 @@ package com.exemplo.demo.infra.data.adapter;
 import com.exemplo.demo.core.domain.entities.Leitura;
 import com.exemplo.demo.core.domain.entities.Livro;
 import com.exemplo.demo.infra.Port.LeituraRepository;
+import com.exemplo.demo.infra.data.Dto.LivroLeituraView;
 import com.exemplo.demo.infra.data.config.EntityMapper;
 import com.exemplo.demo.infra.data.config.EntityMapperInterface;
 import com.exemplo.demo.infra.data.jpa.LeituraJPA;
@@ -12,6 +13,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 @Repository
@@ -117,5 +119,38 @@ public class LeituraRepositoryImpl implements LeituraRepository {
 //        LeituraJPA leitura = entityManager.find(LeituraJPA.class, leitura_id);
 //        entityManager.remove(leitura);
 //    }
+
+
+    //Get Lista
+
+
+//    List<LivroLeituraView>
+    public List<LivroLeituraView> buscarLivrosEmProgresso() {
+        List<LivroLeituraView> livros = entityManager.createQuery("""
+            SELECT
+                l.livroJPA.nome AS nome,
+                l.livroJPA.autor AS autor,
+                l.status AS status,
+                l.paginaAtual AS paginaAtual,
+                l.livroJPA.qtdPaginas AS qtdPaginas
+            FROM LeituraJPA l
+            WHERE l.status = 'EmAndamento'
+        """, LivroLeituraView.class).getResultList();
+
+
+        System.out.println(livros);
+        System.out.println("Passei aqui");
+
+        for (LivroLeituraView livro : livros) {
+            System.out.println("Livro: " + livro.getNome());
+            System.out.println("Autor: " + livro.getAutor());
+            System.out.println("Status: " + livro.getStatus());
+            System.out.println("Páginas lidas: " + livro.getPaginaAtual());
+            System.out.println("Total de páginas: " + livro.getQtdPaginas());
+            System.out.println("--------------------------------");
+        }
+        return livros;
+    }
+
 
 }

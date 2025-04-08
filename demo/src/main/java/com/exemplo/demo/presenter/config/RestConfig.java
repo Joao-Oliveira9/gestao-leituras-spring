@@ -1,9 +1,6 @@
 package com.exemplo.demo.presenter.config;
 
-import com.exemplo.demo.core.domain.usecases.AddAvaliacaoUseCase;
-import com.exemplo.demo.core.domain.usecases.AddLeituraUseCase;
-import com.exemplo.demo.core.domain.usecases.AddMetaLongoPrazoUseCase;
-import com.exemplo.demo.core.domain.usecases.DeleteLivroUseCase;
+import com.exemplo.demo.core.domain.usecases.*;
 import com.exemplo.demo.presenter.rest.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,6 +32,11 @@ public class RestConfig {
     @Bean
     public GetListAvaliacaoController getListAvaliacaoController(){
         return new GetListAvaliacaoController();
+    }
+
+    @Bean
+    public GetListLeituraController getListLeituraController(GetListaUseCase getListaUseCase){
+        return new GetListLeituraController(getListaUseCase);
     }
 
 }
