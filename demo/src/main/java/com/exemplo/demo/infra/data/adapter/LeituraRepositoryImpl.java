@@ -35,7 +35,6 @@ public class LeituraRepositoryImpl implements LeituraRepository {
     }
 
     public LeituraRepositoryImpl(){
-
     }
 
     @Transactional
@@ -84,26 +83,6 @@ public class LeituraRepositoryImpl implements LeituraRepository {
         }
     }
 
-//    @Transactional
-//    public void deletarSql(UUID leitura_id){
-//        LeituraJPA leitura = entityManager.find(LeituraJPA.class, leitura_id);
-////        entityManager.remove(leitura);
-//        entityManager.remove(leitura);
-//    }
-
-//    @Transactional
-//    public LeituraJPA findLeitura(UUID livro_id){
-//        String sql = "SELECT * FROM tb_leitura WHERE livro_id = :id ;";
-//
-//        return  (LeituraJPA)entityManager.createNativeQuery(sql, LeituraJPA.class)
-//                .setParameter("id", livro_id)
-//                .getResultStream()
-//                .findFirst()
-//                .orElse(null);
-//
-//    }
-
-
     @Transactional
     public LivroJPA findLivro(String nomeLivro, String nomeAutor, String sql){
         LivroJPA livroJPA = (LivroJPA) entityManager.createNativeQuery(sql, LivroJPA.class)
@@ -120,27 +99,7 @@ public class LeituraRepositoryImpl implements LeituraRepository {
         }
 
     }
-//
-//    @Transactional
-//    public void deletarSQL(LivroJPA livroJPA){
-//        UUID id = livroJPA.getLivro_id();
-//        String sql = "Delete from tb_leitura WHERE livro_id = :id";
-//        entityManager.createNativeQuery(sql).setParameter("id",id).executeUpdate();;
-//
-////        entityManager.remove(livroJPA);
-//    }
-//
-//    @Transactional
-//    public void deletarSql(UUID leitura_id){
-//        LeituraJPA leitura = entityManager.find(LeituraJPA.class, leitura_id);
-//        entityManager.remove(leitura);
-//    }
 
-
-    //Get Lista
-
-
-//    List<LivroLeituraView>
     public List<LivroLeituraView> buscarLivrosEmProgresso() {
         List<LivroLeituraView> livros = entityManager.createQuery("""
             SELECT
@@ -168,65 +127,6 @@ public class LeituraRepositoryImpl implements LeituraRepository {
     }
 
 
-//    @Transactional
-//    public void atualizarLeituraEMetaBd(String nomeLivro, String nomeAutor, int paginaAtualizada) {
-//        LocalDate hoje = LocalDate.now();
-//        System.out.println("meus zovo1");
-//
-//        // 1. Buscar o livro
-//        String hqlLivro = """
-//            SELECT l FROM LivroJPA l
-//            WHERE l.nome = :nomeLivro AND l.autor = :nomeAutor
-//            """;
-//
-////        LivroJPA livro = entityManager.createQuery(hqlLivro, LivroJPA.class)
-////                .setParameter("nomeLivro", nomeLivro)
-////                .setParameter("nomeAutor", nomeAutor)
-////                .getSingleResult();
-//
-//        LivroJPA livro = null;
-//        try {
-//             livro = entityManager.createQuery(hqlLivro, LivroJPA.class)
-//                    .setParameter("nomeLivro", nomeLivro)
-//                    .setParameter("nomeAutor", nomeAutor)
-//                    .getSingleResult();
-//        } catch (NoResultException e) {
-//            throw new LivroNotFoundException();
-//        }
-//
-//        // 2. Atualizar leitura
-//        LeituraJPA leitura = null;
-//        if(livro !=null){
-//             leitura = livro.getLeituraJPA();
-//        }
-//        else{
-//            throw new LivroNotFoundException();
-//        }
-//
-//        if (leitura != null && paginaAtualizada <= livro.getQtdPaginas()) {
-//            leitura.setPaginaAtual(paginaAtualizada);
-//            System.out.println(leitura.getPaginaAtual());
-//            entityManager.merge(leitura);
-//        }
-//        else{
-//            throw new LivroNotFoundException();
-//        }
-//        System.out.println("meus zovo");
-//
-//        // 3. Atualizar meta
-//        MetaLongoPrazoJPA meta = livro.getMetaLongoPrazoJPA();
-//        if (meta != null) {
-//            if (hoje.isAfter(meta.getData_meta())) {
-//                meta.setStatusMeta(StatusMeta.META_FALHADA);
-//            } else {
-//                meta.setStatusMeta(StatusMeta.META_CUMPRIDA);
-//            }
-//            entityManager.merge(meta);
-//        }else{
-//            throw new MetaNaoExisteException();
-//        }
-//
-//    }
 @Transactional
 public void atualizarLeituraEMetaBd(String nomeLivro, String nomeAutor, int paginaAtualizada) {
     LocalDate hoje = LocalDate.now();
