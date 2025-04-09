@@ -4,15 +4,13 @@ import com.exemplo.demo.core.domain.entities.Leitura;
 import com.exemplo.demo.core.domain.entities.Livro;
 import com.exemplo.demo.core.domain.entities.Status.Status;
 import com.exemplo.demo.core.domain.usecases.AddLeituraUseCase;
+import com.exemplo.demo.exceptions.addLeituraExceptions.PaginasException;
 import com.exemplo.demo.infra.data.config.EntityMapper;
 import com.exemplo.demo.infra.Port.LeituraRepository;
 import com.exemplo.demo.infra.Port.LivroRepository;
-import com.exemplo.demo.infra.data.jpa.LivroJPA;
 import com.exemplo.demo.presenter.dto.LeituraDto;
 import com.exemplo.demo.presenter.dto.LivroDto;
-import com.exemplo.demo.presenter.response.RestMessage;
 import com.exemplo.demo.presenter.response.RestMessageAddLeitura;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -35,7 +33,6 @@ public class AddLeituraService implements AddLeituraUseCase {
 
     }
 
-
     public Livro adicionarLivro(LivroDto livroDto){
         String nomeLivro = livroDto.nomeLivro();
         String nomeAutor = livroDto.nomeAutor();
@@ -47,19 +44,37 @@ public class AddLeituraService implements AddLeituraUseCase {
     }
 
     public ResponseEntity<RestMessageAddLeitura> adicionarLeitura(LeituraDto leituraDto, LivroDto livroDto){
-       Livro livro = adicionarLivro(livroDto);
-       int numPaginaAtual = Integer.parseInt(leituraDto.paginasLidas());
-       Status status = determinarStatusLeitura(livro.getNumPaginas(),numPaginaAtual);
-       double porcentagem = determinarPorcentagemLeitura(numPaginaAtual,livro.getNumPaginas());
-        System.out.println(porcentagem);
-       Leitura leitura = new Leitura(livro,status,numPaginaAtual,porcentagem);
-       System.out.println(leitura.getPorcentagemLeitura());
-       leituraRepository.salvar(leitura);
+        int numPaginaAtual = Integer.parseInt(leituraDto.paginasLidas());
+        int numPaginaTotal = Integer.parseInt(livroDto.numPaginasLivro());
+       if(numPaginaAtual <= numPaginaTotal){
+           Livro livro = adicionarLivro(livroDto);
+//           int numPaginaAtual = Integer.parseInt(leituraDto.paginasLidas());
+           Status status = determinarStatusLeitura(livro.getNumPaginas(),numPaginaAtual);
+           double porcentagem = determinarPorcentagemLeitura(numPaginaAtual,livro.getNumPaginas());
+           System.out.println(porcentagem);
+           Leitura leitura = new Leitura(livro,status,numPaginaAtual,porcentagem);
+           System.out.println(leitura.getPorcentagemLeitura());
+           leituraRepository.salvar(leitura);
 
 //       RestMessage restMessage = new RestMessage("Leitura adicionada");
-
-       RestMessageAddLeitura restMessageAddLeitura = new RestMessageAddLeitura(leitura.getStatus());
-       return ResponseEntity.status(HttpStatus.OK).body(restMessageAddLeitura);
+           RestMessageAddLeitura restMessageAddLeitura = new RestMessageAddLeitura(leitura.getStatus());
+           return ResponseEntity.status(HttpStatus.OK).body(restMessageAddLeitura);
+       }else{
+           throw new PaginasException();
+       }
+//       Livro livro = adicionarLivro(livroDto);
+//       int numPaginaAtual = Integer.parseInt(leituraDto.paginasLidas());
+//       Status status = determinarStatusLeitura(livro.getNumPaginas(),numPaginaAtual);
+//       double porcentagem = determinarPorcentagemLeitura(numPaginaAtual,livro.getNumPaginas());
+//        System.out.println(porcentagem);
+//       Leitura leitura = new Leitura(livro,status,numPaginaAtual,porcentagem);
+//       System.out.println(leitura.getPorcentagemLeitura());
+//       leituraRepository.salvar(leitura);
+//
+////       RestMessage restMessage = new RestMessage("Leitura adicionada");
+//
+//       RestMessageAddLeitura restMessageAddLeitura = new RestMessageAddLeitura(leitura.getStatus());
+//       return ResponseEntity.status(HttpStatus.OK).body(restMessageAddLeitura);
 
     }
 

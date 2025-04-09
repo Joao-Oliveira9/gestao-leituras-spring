@@ -41,4 +41,8 @@ public class ServiceConfig {
     public GetListAvaliacaoUseCase getListAvaliacaoUseCase(LivroRepository livroRepository){
         return new GetListaAvaliacaoService(livroRepository);
     }
+
+    @Bean AtualizarLeituraUseCase atualizarLeituraUseCase(LeituraRepository leituraRepository){
+        return new AtualizarLeituraService(leituraRepository);
+    }
 }

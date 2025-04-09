@@ -2,6 +2,8 @@ package com.exemplo.demo.core.services;
 
 import com.exemplo.demo.core.domain.entities.MetaLongoPrazo;
 import com.exemplo.demo.core.domain.usecases.AddMetaLongoPrazoUseCase;
+import com.exemplo.demo.exceptions.addLeituraExceptions.PaginasException;
+import com.exemplo.demo.exceptions.addMetaExceptions.DataInvalidaException;
 import com.exemplo.demo.infra.Port.MetaLongoPrazoRepository;
 import com.exemplo.demo.presenter.dto.MetaLongoPrazoDto;
 import com.exemplo.demo.presenter.response.RestMessage;
@@ -19,6 +21,7 @@ public class AddMetaLongoPrazoService implements AddMetaLongoPrazoUseCase {
     }
 
     public ResponseEntity<RestMessage> adicionarMeta(MetaLongoPrazoDto metaLongoPrazoDto){
+
         MetaLongoPrazo metaLongoPrazo = metaMapp(metaLongoPrazoDto);
         if(verificarDatas(metaLongoPrazo.getDataInicio(),metaLongoPrazo.getDataMeta())){
             //salvar no repository
@@ -33,9 +36,10 @@ public class AddMetaLongoPrazoService implements AddMetaLongoPrazoUseCase {
 
         }
         else{
-            System.out.println("Datas Invalidas");
-            RestMessage message = new RestMessage("Erro");
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
+            throw new DataInvalidaException();
+//            System.out.println("Datas Invalidas");
+//            RestMessage message = new RestMessage("Erro");
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
         }
 
 

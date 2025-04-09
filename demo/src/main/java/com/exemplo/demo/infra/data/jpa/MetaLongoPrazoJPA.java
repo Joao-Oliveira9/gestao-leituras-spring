@@ -1,5 +1,6 @@
 package com.exemplo.demo.infra.data.jpa;
 
+import com.exemplo.demo.core.domain.entities.Status.StatusMeta;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,4 +39,9 @@ public class MetaLongoPrazoJPA {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updated_at;
+
+    //antigamente nao tinha
+    @Enumerated(EnumType.STRING)
+    @Column(name = "statusMeta", nullable = true)
+    private StatusMeta statusMeta;
 }

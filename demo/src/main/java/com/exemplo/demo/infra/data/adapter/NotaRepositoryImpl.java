@@ -2,6 +2,7 @@ package com.exemplo.demo.infra.data.adapter;
 
 import com.exemplo.demo.core.domain.entities.Avaliacao;
 
+import com.exemplo.demo.exceptions.LivroNotFoundException;
 import com.exemplo.demo.infra.Port.LivroRepository;
 import com.exemplo.demo.infra.Port.NotaRepository;
 import com.exemplo.demo.infra.data.config.EntityMapperInterface;
@@ -61,7 +62,12 @@ public class NotaRepositoryImpl implements NotaRepository {
                 .getResultStream()
                 .findFirst()
                 .orElse(null);
-        return livroJPA;
+
+        if(livroJPA == null){
+            throw new LivroNotFoundException();
+        }else{
+            return livroJPA;
+        }
     }
 
     @Transactional

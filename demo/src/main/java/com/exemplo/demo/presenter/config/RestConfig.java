@@ -39,4 +39,9 @@ public class RestConfig {
         return new GetListLeituraController(getListaUseCase);
     }
 
+    @Bean
+    public PatchPaginasLidasController patchPaginasLidasController(AtualizarLeituraUseCase atualizarLeituraUseCase){
+        return new PatchPaginasLidasController(atualizarLeituraUseCase);
+    }
+
 }

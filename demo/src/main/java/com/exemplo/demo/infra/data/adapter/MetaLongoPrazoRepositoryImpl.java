@@ -1,6 +1,7 @@
 package com.exemplo.demo.infra.data.adapter;
 
 import com.exemplo.demo.core.domain.entities.MetaLongoPrazo;
+import com.exemplo.demo.exceptions.LivroNotFoundException;
 import com.exemplo.demo.infra.Port.LivroRepository;
 import com.exemplo.demo.infra.Port.MetaLongoPrazoRepository;
 import com.exemplo.demo.infra.data.config.EntityMapperInterface;
@@ -57,15 +58,23 @@ public class MetaLongoPrazoRepositoryImpl implements MetaLongoPrazoRepository {
 
     }
 
-//trocar nome -  funcao que busca livro baseado no autor e no nomeLivro
+//trocar nome -  funcao que busca livro baseado no autor e no nomeLivro --- preciso mudar o nome
     public LivroJPA teste(String nomeLivro,String nomeAutor,String sql){
+
         LivroJPA livroJPA = (LivroJPA) entityManager.createNativeQuery(sql, LivroJPA.class)
                 .setParameter("nomeLivro", nomeLivro)
                 .setParameter("nomeAutor", nomeAutor)
                 .getResultStream()
                 .findFirst()
                 .orElse(null);
-        return livroJPA;
+
+        if(livroJPA == null){
+            throw new LivroNotFoundException();
+        }
+        else{
+            return livroJPA;
+        }
+
     }
 
 
