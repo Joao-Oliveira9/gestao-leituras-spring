@@ -32,7 +32,7 @@ public class NotaRepositoryImpl implements NotaRepository {
     public void salvar(Avaliacao avaliacao) {
         String sql = "SELECT * FROM tb_livro WHERE  nome = :nomeLivro and autor = :nomeAutor ;";
 
-        //pegar nomeAutor e nomeLivro, faz sentido ter esses campos em avaliacao?
+
 
         String nomeAutor = avaliacao.getNomeAutor();
         String nomeLivro = avaliacao.getNomeLivro();
@@ -49,9 +49,7 @@ public class NotaRepositoryImpl implements NotaRepository {
 
         System.out.println(avaliacaoJPA.getNota());
         salvarSql(avaliacaoJPA);
-//        System.out.println(livroJPA.getLivro_id());
-        //mapear avaliacao em avaliacaoJPA
-        //persist -> salvar
+
     }
 
     //funcao que busca livro baseado no autor e no nomeLivro

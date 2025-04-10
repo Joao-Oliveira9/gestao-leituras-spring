@@ -15,11 +15,6 @@ public class GetListaAvaliacaoService implements GetListAvaliacaoUseCase {
 
     }
 
-//    public void buscandoAvaliacoes(){
-//        //definir o status por aqui
-//
-//        livroRepository.buscarAvaliacoes();
-//    }
 
     public List<LivroAvaliacaoView> buscandoAvaliacoes(){
         return  livroRepository.buscarAvaliacoes();

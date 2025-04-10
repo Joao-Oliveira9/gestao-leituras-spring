@@ -62,19 +62,6 @@ public class AddLeituraService implements AddLeituraUseCase {
        }else{
            throw new PaginasException();
        }
-//       Livro livro = adicionarLivro(livroDto);
-//       int numPaginaAtual = Integer.parseInt(leituraDto.paginasLidas());
-//       Status status = determinarStatusLeitura(livro.getNumPaginas(),numPaginaAtual);
-//       double porcentagem = determinarPorcentagemLeitura(numPaginaAtual,livro.getNumPaginas());
-//        System.out.println(porcentagem);
-//       Leitura leitura = new Leitura(livro,status,numPaginaAtual,porcentagem);
-//       System.out.println(leitura.getPorcentagemLeitura());
-//       leituraRepository.salvar(leitura);
-//
-////       RestMessage restMessage = new RestMessage("Leitura adicionada");
-//
-//       RestMessageAddLeitura restMessageAddLeitura = new RestMessageAddLeitura(leitura.getStatus());
-//       return ResponseEntity.status(HttpStatus.OK).body(restMessageAddLeitura);
 
     }
 

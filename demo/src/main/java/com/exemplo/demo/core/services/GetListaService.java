@@ -17,7 +17,5 @@ public class GetListaService implements GetListaUseCase {
         return leituraRepository.buscarLivrosEmProgresso();
     }
 
-//    public void buscarLivrosEmProgresso(){
-//       leituraRepository.buscarLivrosEmProgresso();
-//   }
+
 }

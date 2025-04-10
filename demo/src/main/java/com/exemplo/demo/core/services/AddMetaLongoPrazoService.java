@@ -24,7 +24,7 @@ public class AddMetaLongoPrazoService implements AddMetaLongoPrazoUseCase {
 
         MetaLongoPrazo metaLongoPrazo = metaMapp(metaLongoPrazoDto);
         if(verificarDatas(metaLongoPrazo.getDataInicio(),metaLongoPrazo.getDataMeta())){
-            //salvar no repository
+
             System.out.println(metaLongoPrazo.getDataInicio());
             System.out.println(metaLongoPrazo.getDataMeta());
             System.out.println(metaLongoPrazo.getNomeAutor());
@@ -37,9 +37,7 @@ public class AddMetaLongoPrazoService implements AddMetaLongoPrazoUseCase {
         }
         else{
             throw new DataInvalidaException();
-//            System.out.println("Datas Invalidas");
-//            RestMessage message = new RestMessage("Erro");
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
+
         }
 
 

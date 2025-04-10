@@ -36,22 +36,11 @@ public class MetaLongoPrazoRepositoryImpl implements MetaLongoPrazoRepository {
         String nomeLivro = metaLongoPrazo.getNomeLivro();
         String nomeAutor = metaLongoPrazo.getNomeAutor();
 
-//        System.out.println("sex"+nomeAutor);
-//        System.out.println("sex"+nomeLivro);
-//
-//        String sql1 = "SELECT * FROM tb_livro WHERE  nome = '"+nomeLivro+"' and autor = '"+nomeAutor+"';";
-//        System.out.println(sql1);
-//        if(sql.equals(sql1)){
-//            System.out.println("Sou macho");
-//        }
-
-//        System.out.println(sql);
 
         LivroJPA livroJPA = teste(nomeLivro,nomeAutor,sql);
         MetaLongoPrazoJPA metaLongoPrazoJPA = entityMapper.mapLongoPrazo(metaLongoPrazo,livroJPA);
         System.out.println(livroJPA.getAutor());
 
-//        System.out.println(metaLongoPrazoJPA.getLivroJPA().getAutor());
 
         entityManager.persist(metaLongoPrazoJPA);
         System.out.println(livroJPA.getAutor());
