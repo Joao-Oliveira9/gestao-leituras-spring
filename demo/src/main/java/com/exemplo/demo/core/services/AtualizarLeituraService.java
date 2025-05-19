@@ -19,7 +19,7 @@ public class AtualizarLeituraService implements AtualizarLeituraUseCase {
     }
 
     public ResponseEntity<RestMessage> atualizarPaginas(String nomeLivro,String nomeAutor, int paginaAtualizada){
-       leituraRepository.atualizarLeituraEMetaBd(nomeLivro,nomeAutor, paginaAtualizada);
+       leituraRepository.atualizarLeituraEMeta(nomeLivro,nomeAutor, paginaAtualizada);
        RestMessage restMessage = new RestMessage("atualizado com sucesso");
        return ResponseEntity.status(HttpStatus.OK).body(restMessage) ;
     }

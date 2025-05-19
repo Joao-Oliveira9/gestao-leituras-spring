@@ -13,6 +13,6 @@ import java.util.List;
 @Repository
 public interface LivroRepository  {
     public void salvar(Livro livro);
-//    public void deletar(Livro livro);
+    public void deletar(Livro livro);
     public List<LivroAvaliacaoView> buscarAvaliacoes();
 }

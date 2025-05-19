@@ -1,5 +1,6 @@
 package com.exemplo.demo.core.services.config;
 
+import com.exemplo.demo.core.domain.entities.Livro;
 import com.exemplo.demo.core.domain.usecases.*;
 import com.exemplo.demo.core.services.*;
 import com.exemplo.demo.infra.Port.LeituraRepository;
@@ -23,8 +24,8 @@ public class ServiceConfig {
     }
 
     @Bean
-    public DeleteLivroUseCase deleteLivroUseCase(LeituraRepository leituraRepository){
-        return new DeleteLivroService(leituraRepository);
+    public DeleteLivroUseCase deleteLivroUseCase(LeituraRepository leituraRepository,LivroRepository livroRepository){
+        return new DeleteLivroService(leituraRepository, livroRepository);
     }
 
     @Bean

@@ -11,8 +11,8 @@ import java.util.List;
 
 public interface LeituraRepository  {
     public void salvar(Leitura leitura);
-    public void deletar(Livro livro);
-    public List<LivroLeituraView> buscarLivrosEmProgresso();
-    public void atualizarLeituraEMetaBd(String nomeLivro, String nomeAutor, int paginaAtualizada);
+//    public void deletarLeitura1(Livro livro);
+    public List<LivroLeituraView> buscarLeiturasEmProgresso();
+    public void atualizarLeituraEMeta(String nomeLivro, String nomeAutor, int paginaAtualizada);
 //    public void buscarLivrosEmProgresso();
 }

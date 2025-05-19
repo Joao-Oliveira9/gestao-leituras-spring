@@ -18,6 +18,8 @@ public class DeleteLivroController implements DeleteLivroResource {
         System.out.println(livroDeletarDto.nomeLivro());
         System.out.println(livroDeletarDto.nomeAutor());
 
+        System.out.println("passei aqui");
+
         RestMessage restMessage = new RestMessage("deletado");
         deleteLivroUseCase.deletarLeitura(livroDeletarDto);
         return ResponseEntity.status(HttpStatus.OK).body(restMessage);

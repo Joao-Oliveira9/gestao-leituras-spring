@@ -25,9 +25,9 @@ public class AddMetaLongoPrazoService implements AddMetaLongoPrazoUseCase {
         MetaLongoPrazo metaLongoPrazo = metaMapp(metaLongoPrazoDto);
         if(verificarDatas(metaLongoPrazo.getDataInicio(),metaLongoPrazo.getDataMeta())){
 
-            System.out.println(metaLongoPrazo.getDataInicio());
-            System.out.println(metaLongoPrazo.getDataMeta());
-            System.out.println(metaLongoPrazo.getNomeAutor());
+//            System.out.println(metaLongoPrazo.getDataInicio());
+//            System.out.println(metaLongoPrazo.getDataMeta());
+//            System.out.println(metaLongoPrazo.getNomeAutor());
             metaLongoPrazoRepository.salvar(metaLongoPrazo);
 
             RestMessage message = new RestMessage("Data cadastrada");

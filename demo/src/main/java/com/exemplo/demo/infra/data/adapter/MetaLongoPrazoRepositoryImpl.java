@@ -37,7 +37,7 @@ public class MetaLongoPrazoRepositoryImpl implements MetaLongoPrazoRepository {
         String nomeAutor = metaLongoPrazo.getNomeAutor();
 
 
-        LivroJPA livroJPA = teste(nomeLivro,nomeAutor,sql);
+        LivroJPA livroJPA = salvarBd(nomeLivro,nomeAutor,sql);
         MetaLongoPrazoJPA metaLongoPrazoJPA = entityMapper.mapLongoPrazo(metaLongoPrazo,livroJPA);
         System.out.println(livroJPA.getAutor());
 
@@ -48,7 +48,7 @@ public class MetaLongoPrazoRepositoryImpl implements MetaLongoPrazoRepository {
     }
 
 //trocar nome -  funcao que busca livro baseado no autor e no nomeLivro --- preciso mudar o nome
-    public LivroJPA teste(String nomeLivro,String nomeAutor,String sql){
+    public LivroJPA salvarBd(String nomeLivro,String nomeAutor,String sql){
 
         LivroJPA livroJPA = (LivroJPA) entityManager.createNativeQuery(sql, LivroJPA.class)
                 .setParameter("nomeLivro", nomeLivro)

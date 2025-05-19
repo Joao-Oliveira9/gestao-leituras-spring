@@ -22,11 +22,11 @@ public class AddLeituraService implements AddLeituraUseCase {
     //COLOCAR NO CONSTRUTOR tirar autowired
     LeituraRepository leituraRepository;
 
-    LivroRepository livroRepository;
+//    LivroRepository livroRepository;
 
     public AddLeituraService(LeituraRepository leituraRepository,LivroRepository livroRepository){
         this.leituraRepository = leituraRepository;
-        this.livroRepository = livroRepository;
+//        this.livroRepository = livroRepository;
     }
 
     public AddLeituraService(){
@@ -51,9 +51,9 @@ public class AddLeituraService implements AddLeituraUseCase {
 //           int numPaginaAtual = Integer.parseInt(leituraDto.paginasLidas());
            Status status = determinarStatusLeitura(livro.getNumPaginas(),numPaginaAtual);
            double porcentagem = determinarPorcentagemLeitura(numPaginaAtual,livro.getNumPaginas());
-           System.out.println(porcentagem);
+//           System.out.println(porcentagem);
            Leitura leitura = new Leitura(livro,status,numPaginaAtual,porcentagem);
-           System.out.println(leitura.getPorcentagemLeitura());
+//           System.out.println(leitura.getPorcentagemLeitura());
            leituraRepository.salvar(leitura);
 
 //       RestMessage restMessage = new RestMessage("Leitura adicionada");

@@ -40,67 +40,71 @@ public class LeituraRepositoryImpl implements LeituraRepository {
     @Transactional
     public void salvar(Leitura leitura) {
         LeituraJPA leituraJPA = entityMapper.mapLeitura(leitura);
-
         entityManager.persist(leituraJPA); // Insere novo
         // ou: entityManager.merge(aluno); // Insere ou atualiza (mais seguro)
     }
 
-    @Transactional
-    public void deletar(Livro livro){
-        String nomeAutor = livro.getNomeAutor();
-        String nome = livro.getNome();
+//    @Transactional
+//    public void deletarLeitura1(Livro livro){
+//        System.out.println("passei aqui leitura repository ");
+//        String nomeAutor = livro.getNomeAutor();
+//        String nome = livro.getNome();
+//
+//        String sql = "SELECT * FROM tb_livro WHERE  nome = :nomeLivro and autor = :nomeAutor ;";
+//        LivroJPA livroJPA = findLivro(nome,nomeAutor,sql);
+//        System.out.println(livroJPA.getAutor());
+//        System.out.println(livroJPA.getLivro_id());
+////        LeituraJPA leituraJPA = findLeitura(livroJPA.getLivro_id());
+////        deletarSql(leituraJPA.getLeitura_id());
+//
+//        deletarLivroPorId(livroJPA.getLivro_id());
+////        deletarPorLivroId(livroJPA.getLivro_id());
+//    }
 
-        String sql = "SELECT * FROM tb_livro WHERE  nome = :nomeLivro and autor = :nomeAutor ;";
-        LivroJPA livroJPA = findLivro(nome,nomeAutor,sql);
-        System.out.println(livroJPA.getAutor());
-        System.out.println(livroJPA.getLivro_id());
-//        LeituraJPA leituraJPA = findLeitura(livroJPA.getLivro_id());
-//        deletarSql(leituraJPA.getLeitura_id());
-
-        deletarLivroPorId(livroJPA.getLivro_id());
-//        deletarPorLivroId(livroJPA.getLivro_id());
-    }
 
 
+//    remover do daqui não é usado
+//    @Transactional
+//    public void deletarPorLivroId(UUID livroId) {
+//        String jpql = "DELETE FROM LeituraJPA l WHERE l.livroJPA.livro_id = :livroId";
+//
+//        entityManager.createQuery(jpql)
+//                .setParameter("livroId", livroId)
+//                .executeUpdate();
+//    }
 
-    @Transactional
-    public void deletarPorLivroId(UUID livroId) {
-        String jpql = "DELETE FROM LeituraJPA l WHERE l.livroJPA.livro_id = :livroId";
 
-        entityManager.createQuery(jpql)
-                .setParameter("livroId", livroId)
-                .executeUpdate();
-    }
+//    MOVER para livro - livro repository
+//    @Transactional
+//    public void deletarLivroPorId(UUID livroId) {
+//        LivroJPA livro = entityManager.find(LivroJPA.class, livroId);
+//        if (livro != null) {
+//            entityManager.remove(livro);
+//        }
+//        else{
+//            throw new LivroNotFoundException();
+//        }
+//    }
 
-    @Transactional
-    public void deletarLivroPorId(UUID livroId) {
-        LivroJPA livro = entityManager.find(LivroJPA.class, livroId);
-        if (livro != null) {
-            entityManager.remove(livro);
-        }
-        else{
-            throw new LivroNotFoundException();
-        }
-    }
+//    mover pra livro - ja esta no livro repository
+//    @Transactional
+//    public LivroJPA findLivro(String nomeLivro, String nomeAutor, String sql){
+//        LivroJPA livroJPA = (LivroJPA) entityManager.createNativeQuery(sql, LivroJPA.class)
+//                .setParameter("nomeLivro", nomeLivro)
+//                .setParameter("nomeAutor", nomeAutor)
+//                .getResultStream()
+//                .findFirst()
+//                .orElse(null);
+//        if(livroJPA == null){
+//            throw new LivroNotFoundException();
+//        }
+//        else{
+//            return livroJPA;
+//        }
+//    }
 
-    @Transactional
-    public LivroJPA findLivro(String nomeLivro, String nomeAutor, String sql){
-        LivroJPA livroJPA = (LivroJPA) entityManager.createNativeQuery(sql, LivroJPA.class)
-                .setParameter("nomeLivro", nomeLivro)
-                .setParameter("nomeAutor", nomeAutor)
-                .getResultStream()
-                .findFirst()
-                .orElse(null);
-        if(livroJPA == null){
-            throw new LivroNotFoundException();
-        }
-        else{
-            return livroJPA;
-        }
-
-    }
-
-    public List<LivroLeituraView> buscarLivrosEmProgresso() {
+//    mover para livroRepository
+    public List<LivroLeituraView> buscarLeiturasEmProgresso() {
         List<LivroLeituraView> livros = entityManager.createQuery("""
             SELECT
                 l.livroJPA.nome AS nome,
@@ -128,7 +132,7 @@ public class LeituraRepositoryImpl implements LeituraRepository {
 
 
 @Transactional
-public void atualizarLeituraEMetaBd(String nomeLivro, String nomeAutor, int paginaAtualizada) {
+public void atualizarLeituraEMeta(String nomeLivro, String nomeAutor, int paginaAtualizada) {
     LocalDate hoje = LocalDate.now();
 
     // 1. Buscar o livro

@@ -10,9 +10,11 @@ import com.exemplo.demo.presenter.dto.LivroDeletarDto;
 public class DeleteLivroService implements DeleteLivroUseCase {
 
     LeituraRepository leituraRepository;
+    LivroRepository livroRepository;
 
-    public DeleteLivroService(LeituraRepository leituraRepository){
+    public DeleteLivroService(LeituraRepository leituraRepository,LivroRepository livroRepository){
         this.leituraRepository = leituraRepository;
+        this.livroRepository = livroRepository;
     }
 
     public void deletarLeitura(LivroDeletarDto livroDeletarDto){
@@ -20,8 +22,11 @@ public class DeleteLivroService implements DeleteLivroUseCase {
         livro.setNome(livroDeletarDto.nomeLivro());
         livro.setNomeAutor(livroDeletarDto.nomeAutor());
 
-        leituraRepository.deletar(livro);
-        System.out.println(livro.getNome());
+
+        System.out.println("passei nesse service de delete");
+        livroRepository.deletar(livro);
+        System.out.println("passei nesse service de delete2");
+//        System.out.println(livro.getNome());
     }
 
 
