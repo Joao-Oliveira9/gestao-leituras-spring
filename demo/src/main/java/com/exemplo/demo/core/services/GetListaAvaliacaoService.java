@@ -14,7 +14,7 @@ public class GetListaAvaliacaoService implements GetListAvaliacaoUseCase {
         this.livroRepository = livroRepository;
 
     }
-
+    //teste
 
     public List<LivroAvaliacaoView> buscandoAvaliacoes(){
         return  livroRepository.buscarAvaliacoes();
